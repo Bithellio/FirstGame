@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class RayShooter : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject BulletPrefab;
 
+    
     private Camera _camera;
 
 
     // Start is called before the first frame update
     void Start()
-    {
-        _camera = GetComponent<Camera>();
-        
+    {        
+        _camera = GetComponent<Camera>();        
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false; 
     }
@@ -21,8 +23,7 @@ public class RayShooter : MonoBehaviour
     {
         var size = 12;
         var posx = _camera.pixelWidth / 2 - size / 4;
-        var posy = _camera.pixelHeight / 2 - size / 2;
-  
+        var posy = _camera.pixelHeight / 2 - size / 2;  
         GUI.Label(new Rect(posx,posy,size,size),"*");
     }
 
@@ -36,20 +37,19 @@ public class RayShooter : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                var hitObject = hit.transform.gameObject;
-                var target = hitObject.GetComponent<ReactiveTarget>();
-                if (target != null)
-                {
-                    target.ReactToHit(); 
+
+
+                GameObject bullet;
+                    bullet = Instantiate(BulletPrefab) as GameObject;
+                    bullet.transform.position = transform.TransformPoint(Vector3.forward * 1.5f);
+                    bullet.transform.rotation = transform.rotation; 
                 }
-                else
-                {
+               
 
-                    StartCoroutine(SphereIndicator(hit.point));
+                   // StartCoroutine(SphereIndicator(hit.point));
+                
 
-                }
-
-            }
+            
         }
     }
 
@@ -64,3 +64,4 @@ public class RayShooter : MonoBehaviour
         Destroy(sphere);
     }
 }
+

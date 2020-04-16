@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class ReactiveTarget : MonoBehaviour
 {
-
-    public int health = 3 ;
+    [SerializeField] private int StartingHealth = 5;
+    private int _health;
     // Start is called before the first frame update
     void Start()
     {
-        
+        _health = StartingHealth; 
     }
 
     // Update is called once per frame
@@ -19,10 +19,10 @@ public class ReactiveTarget : MonoBehaviour
         
     }
 
-    public void ReactToHit()
+    public void ReactToHit(int damage)
     {
-        health--;
-        if (health == 0)
+        _health -= damage;
+        if (_health == 0)
         {
             var behaviour = GetComponent<WanderingAi>();
             if (behaviour != null)
