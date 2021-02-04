@@ -22,8 +22,8 @@ public class FPSInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var deltax = Input.GetAxis("Horizontal") * Speed;
-        var deltaz = Input.GetAxis("Vertical") * Speed;
+        var deltax = Input.GetAxis("Horizontal").normalized * Speed;
+        var deltaz = Input.GetAxis("Vertical").normalized * Speed;
         
         var movement = new Vector3(deltax,0,deltaz);
         movement = Vector3.ClampMagnitude(movement, Speed);
