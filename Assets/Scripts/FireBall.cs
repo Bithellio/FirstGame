@@ -7,7 +7,7 @@ public class FireBall : MonoBehaviour
 {
 
     public float Speed = 10.0f;
-    public int damage = 1; 
+    public int Damage = 1; 
 
     // Update is called once per frame
     void Update()
@@ -20,7 +20,7 @@ public class FireBall : MonoBehaviour
         PlayerCharacter player = other.GetComponent<PlayerCharacter>();
         if (player != null)
         {
-            player.Hurt(damage);
+            player.Hurt(Damage);
             Debug.Log("DIRECT HIT !");
         }
 
